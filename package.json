@@ -1,0 +1,49 @@
+{
+  "name": "grunt-plovr-ext",
+  "description": "Grunt plugin wrapper for google closure tool plovr - includes all Features without the need of an external config File for Plovr",
+  "version": "1.0.0",
+  "homepage": "https://github.com/software-engineering/grunt-plovr-ext",
+  "author": {
+    "name": "it-schaedler",
+    "email": "mail@it-schaedler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/software-engineering/grunt-plovr-ext.git"
+  },
+  "bugs": {
+    "url": "https://github.com/software-engineering/grunt-plovr-ext/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/software-engineering/grunt-plovr-ext/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4"
+  },
+  "keywords": [
+    "gruntplugin",
+    "Closure Compiler",
+    "minification",
+    "Closure Builder",
+    "Google Closure Library",
+    "Closure tools",
+    "Closure DepsWriter",
+    "Performance",
+    "Plovr"
+  ],
+  "dependencies": {
+    "shelljs": "~0.2.6"
+  }
+}
