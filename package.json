@@ -1,7 +1,7 @@
 {
   "name": "grunt-plovr-ext",
   "description": "Grunt plugin wrapper for google closure tool plovr - includes all Features without the need of an external config File for Plovr",
-  "version": „1.0.1“,
+  "version": "1.0.1",
   "homepage": "https://github.com/software-engineering/grunt-plovr-ext",
   "author": {
     "name": "it-schaedler",
