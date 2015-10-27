@@ -6,4 +6,4 @@ tmp
 .grunt
 target
 *.pyc
-
+.DS_Store
