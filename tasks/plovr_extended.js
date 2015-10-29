@@ -155,7 +155,7 @@ module.exports = function (grunt) {
         grunt.file.write(configfilename, configFileContent);
 
         // do the plovr job
-        var cmd = cd_cwd + ' java ' + '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 ' + '-jar ' + path.join(__dirname, '..', 'bin', '/') + 'plovr.jar build ' + configfilename + options_;
+        var cmd = cd_cwd + ' java -jar ' + path.join(__dirname, '..', 'bin', '/') + 'plovr.jar build ' + configfilename + options_;
         console.log(cmd);
         var prog = shell.exec(cmd);
         // delete temporary configfile
