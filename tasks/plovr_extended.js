@@ -8,17 +8,18 @@
 
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     var shell = require('shelljs'),
         path = require('path');
 
-    grunt.registerMultiTask('plovr_extended', 'Grunt plugin wrapper for google closure tool plovr - includes all Features without the need of an external config File for Plovr', function () {
+    grunt.registerMultiTask('plovr_extended', 'Grunt plugin wrapper for google closure tool plovr - includes all Features without the need of an external config File for Plovr', function() {
 
         // config filename - check if file already exists - if yes: delete them first
         var configfilename = 'plovr.config.js';
 
-        if (grunt.file.exists(configfilename)) {
+        if (grunt.file.exists(configfilename))
+        {
             grunt.file.delete(configfilename);
         }
 
@@ -54,10 +55,14 @@ module.exports = function (grunt) {
                 case "property-map-output-file":
                 case "module-source-map-name":
                 case "test-template":
-                    if ((typeof options[key] == "string") && (options[key] !== null)) {
+                case "source-map-base-url":
+                    if( (typeof options[key] == "string") && (options[key] !== null) )
+                    {
                         configFileContent += seperator + '"' + switchkey + '": "' + options[key] + '"';
-                    } else {
-                        grunt.fail.warn('Option "' + switchkey + '" is not type of string!');
+                    }
+                    else
+                    {
+                        grunt.fail.warn('Option "' + switchkey + '" is not type of string!' );
                     }
                     break;
                 // boolean Input Values
@@ -72,22 +77,26 @@ module.exports = function (grunt) {
                 case "ambiguate-properties":
                 case "disambiguate-properties":
                 case "add-sourcemap-url":
-                    if ((typeof options[key] == "boolean") && (options[key] !== null)) {
+                    if( (typeof options[key] == "boolean") && (options[key] !== null) )
+                    {
                         configFileContent += seperator + '"' + switchkey + '": ' + options[key];
                     }
-                    else {
-                        grunt.fail.warn('Option "' + switchkey + '" is not type of boolean!');
+                    else
+                    {
+                        grunt.fail.warn('Option "' + switchkey + '" is not type of boolean!' );
                     }
                     break;
                 // object Input Values
                 case "define":
                 case "checks":
                 case "experimental-compiler-options":
-                    if ((typeof options[key] == "object") && (options[key] !== null)) {
-                        configFileContent += seperator + '"' + switchkey + '": ' + JSON.stringify(options[key], null, "    ");
+                    if( (typeof options[key] == "object") && (options[key] !== null) )
+                    {
+                        configFileContent += seperator + '"' + switchkey + '": ' + JSON.stringify(options[key],null,"    ");
                     }
-                    else {
-                        grunt.fail.warn('Option "' + switchkey + '" is not type of object!');
+                    else
+                    {
+                        grunt.fail.warn('Option "' + switchkey + '" is not type of object!' );
                     }
                     break;
                 case "paths":
@@ -99,12 +108,17 @@ module.exports = function (grunt) {
                 case "id-generators":
                 case "soy-function-plugins":
                 case "test-excludes":
-                    if ((typeof options[key] == "string") && (options[key] !== null)) {
+                    if( (typeof options[key] == "string") && (options[key] !== null) )
+                    {
                         configFileContent += seperator + '"' + switchkey + '": ' + options[key];
-                    } else if ((typeof options[key] == "object") && (options[key] !== null)) {
-                        configFileContent += seperator + '"' + switchkey + '": ' + JSON.stringify(options[key], null, "            ");
-                    } else {
-                        grunt.fail.warn('Option "' + switchkey + '" is not type of string or array - is type:' + typeof options[key]);
+                    }
+                    else if( (typeof options[key] == "object") && (options[key] !== null) )
+                    {
+                        configFileContent += seperator + '"' + switchkey + '": ' + JSON.stringify(options[key],null,"            ");
+                    }
+                    else
+                    {
+                        grunt.fail.warn('Option "' + switchkey + '" is not type of string or array - is type:' + typeof options[key] );
                     }
                     break;
                 default:
@@ -115,9 +129,9 @@ module.exports = function (grunt) {
         }
 
         // Iterate over all specified file groups.
-        this.files.forEach(function (f) {
+        this.files.forEach(function(f) {
 
-            var files = f.src.filter(function (filepath) {
+            var files = f.src.filter(function(filepath) {
                 if (!grunt.file.exists(filepath)) {
                     grunt.fail.warn('File ' + filepath + ' does not exist!');
                     return false;
@@ -131,31 +145,33 @@ module.exports = function (grunt) {
                 }
             });
 
-            if (files.length > 0) {
+            if (files.length > 0)
+            {
                 configFileContent += seperator + '"inputs": [\n';
                 for (var i = 0; i < files.length; i++) {
-                    configFileContent += (i > 0 ? ',\n' : '') + '            "' + files[i] + '"';
+                    configFileContent += (i>0?',\n':'') + '            "' + files[i] + '"';
                 }
                 configFileContent += '\n          ]';
             }
 
-            if ((typeof f.dest == "string") && (f.dest !== null)) {
+            if ( (typeof f.dest == "string") && (f.dest !== null) )
+            {
                 configFileContent += seperator + '"output-file": "' + f.dest + '"';
             }
         });
 
         configFileContent += '\n}';
-        if (this.data.cwd) {
+        if(this.data.cwd) {
             cwd = this.data.cwd;
             cd_cwd = 'cd ' + cwd + ' &&';
             configfilename = path.join(cwd, configfilename);
         };
 
         // Write configFileContent
-        grunt.file.write(configfilename, configFileContent);
+        grunt.file.write(configfilename,configFileContent);
 
         // do the plovr job
-        var cmd = cd_cwd + ' java -jar ' + path.join(__dirname, '..', 'bin', '/') + 'plovr.jar build ' + configfilename + options_;
+        var cmd = cd_cwd + ' java -jar ' + path.join(__dirname, '..', 'bin', '/') +'plovr.jar build ' + configfilename + options_;
         console.log(cmd);
         var prog = shell.exec(cmd);
         // delete temporary configfile
@@ -167,4 +183,3 @@ module.exports = function (grunt) {
     });
 
 };
-

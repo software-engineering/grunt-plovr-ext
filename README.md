@@ -97,4 +97,5 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+2.0.0 Plovr v4.1.1 add sourcemap path and naming other functionality for create_source_map
 1.0.1 Plovr v4.1.1
