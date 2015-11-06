@@ -89,6 +89,7 @@ module.exports = function(grunt) {
                 // object Input Values
                 case "define":
                 case "checks":
+                case "location-mapping":
                 case "experimental-compiler-options":
                     if( (typeof options[key] == "object") && (options[key] !== null) )
                     {
